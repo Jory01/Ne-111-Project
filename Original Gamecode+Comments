@@ -1,3 +1,4 @@
+#JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
 """Pacman, classic arcade game.
 
 Exercises
@@ -18,8 +19,8 @@ from freegames import floor, vector
 #center.goto(0,0)
 
 state = {'score': 0}
-path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible
-writer = Turtle(visible=False) #Same as above but object is called writer
+path = Turtle(visible=False)  #Generates a turtle object with name path and makes the indicator not visible
+writer = Turtle(visible=False)  #Same as above but object is called writer
 aim = vector(5, 0)
 pacman = vector(-40, -80)
 ghosts = [
