@@ -1,4 +1,4 @@
-#JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
+JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
 
 from random import choice
 from turtle import *
@@ -9,8 +9,8 @@ from freegames import floor, vector
 #center.goto(0,0)
 
 state = {'score': 0}
-path = Turtle(visible=False)  #Generates a turtle object with name path and makes the indicator not visible
-writer = Turtle(visible=False)  #Same as above but object is called writer
+path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible J.H
+writer = Turtle(visible=False) #Same as above but object is called writer J.H
 aim = vector(5, 0)
 pacman = vector(-40, -80)
 ghosts = [
@@ -21,7 +21,7 @@ ghosts = [
 ]
 # fmt: off
 tiles = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #first 0 is x=-200 y=180, last 0 in the row is 180,180
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #first 0 is x=-200 y=180, last 0 in the row is 180,180 J.H/R.K
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -45,31 +45,31 @@ tiles = [
 # fmt: on
 
 
-def square(x, y): #Makes a function that generates a 20,20 square at location x,y (Ends at x,y as well)
+def square(x, y): #Makes a function that generates a 20,20 square at location x,y (Ends at x,y as well) R.K
     """Draw square using path at (x, y)."""
     path.up()
     path.goto(x, y)
     path.down()
     path.begin_fill()
 
-    for count in range(4): #Makes count equale to 0,1,2,3 and moves it 4 times making a 20,20 square
+    for count in range(4): #Makes count equale to 0,1,2,3 and moves it 4 times making a 20,20 square R.K
         path.forward(20)
         path.left(90)
 
     path.end_fill()
 
 
-def offset(point): #Turns (x,y) coordinates into index in our list named tiles 
+def offset(point): #Turns (x,y) coordinates into index in our list named tiles J.H/R.K
     """Return offset of point in tiles."""
-    x = (floor(point.x, 20) + 200) / 20 #Floors it to 20 becuase squares are every 20 in x and y so a x=-36 DNE (no index)
+    x = (floor(point.x, 20) + 200) / 20 #Floors it to 20 becuase squares are every 20 in x and y so a x=-36 DNE (no index) J.H/R.K
     y = (180 - floor(point.y, 20)) / 20
-    index = int(x + y * 20) #This finds the index value for a vector located at some (x,y)
+    index = int(x + y * 20) #This finds the index value for a vector located at some (x,y) J.H/R.K
     return index
 
 
 def valid(point):
     """Return True if point is valid in tiles."""
-    index = offset(point) #Finds the index of the vector using above function
+    index = offset(point) #Finds the index of the vector using above function J.H/R.K
 
     if tiles[index] == 0:
         return False
@@ -90,7 +90,7 @@ def world():
     for index in range(len(tiles)):
         tile = tiles[index] #the map
 
-        if tile > 0: #if the index is 1 or not first square is at -200,180 and moves to the right by 20 every index and -20 in y every 20 indexs!
+        if tile > 0: #if the index is 1 or not first square is at -200,180 and moves to the right by 20 every index and -20 in y every 20 indexs! J.H
             x = (index % 20) * 20 - 200
             y = 180 - (index // 20) * 20
             square(x, y)
@@ -129,7 +129,7 @@ def move():
             point.move(course)
         else:
             options = [
-                vector(5, 0), #Ghosts speed
+                vector(5, 0), #Ghosts speed J.H
                 vector(-5, 0),
                 vector(0, 5),
                 vector(0, -5),
@@ -166,11 +166,11 @@ writer.color('white')
 writer.write(state['score'])
 listen()
 
-onkey(lambda: change(5, 0), 'Right') #Speed of up,down,left,right of pacman uses the change function and makes aim equale to (5,0),(-5,0),(0,5),(0,-5) if valid function==True
+onkey(lambda: change(5, 0), 'Right') #Speed of up,down,left,right of pacman J.H
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
 world()
 move()
-done() #Allows for input from keyboard
+done() #Allows for input from keyboard J.H
 
