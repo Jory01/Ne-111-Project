@@ -1,4 +1,4 @@
-JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
+#JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
 
 from random import choice
 from turtle import *
@@ -11,9 +11,9 @@ from freegames import floor, vector
 state = {'score': 0}
 path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible J.H
 writer = Turtle(visible=False) #Same as above but object is called writer J.H
-aim = vector(5, 0)
-pacman = vector(-40, -80)
-ghosts = [
+aim = vector(5, 0)      
+pacman = vector(-40, -80)    #Starting location of pacman R.K
+ghosts = [                   #Starting location of the ghosts R.K
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
     [vector(100, 160), vector(0, -5)],
@@ -95,10 +95,10 @@ def world():
             y = 180 - (index // 20) * 20
             square(x, y)
 
-            if tile == 1:
+            if tile == 1:        #Makes the food for pacman to eat R.K
                 path.up()
-                path.goto(x + 10, y + 10)
-                path.dot(2, 'white')
+                path.goto(x + 10, y + 10)       #Moves pen to the center of tile R.K
+                path.dot(2, 'white')           #Creates a white dot of raidus 2 R.K
 
 
 def move():
@@ -121,8 +121,8 @@ def move():
         square(x, y)
 
     up()
-    goto(pacman.x + 10, pacman.y + 10)
-    dot(20, 'yellow')
+    goto(pacman.x + 10, pacman.y + 10)  #Initial location of pacman R.K
+    dot(20, 'yellow')                   #Creates pacman R.K
 
     for point, course in ghosts:
         if valid(point + course):
@@ -158,7 +158,7 @@ def change(x, y):
         aim.y = y
 
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0) 
 hideturtle()
 tracer(False)
 writer.goto(160, 160)
