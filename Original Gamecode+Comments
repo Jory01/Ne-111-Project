@@ -1,4 +1,4 @@
-#JH=Jory Haberman RK=Ryan Khandaker BC=Brain Choi
+J.H=Jory Haberman R.K=Ryan Khandaker B.C=Brian Choi
 
 from random import choice
 from turtle import *
@@ -8,12 +8,12 @@ from freegames import floor, vector
 #center=Turtle(visible=True)
 #center.goto(0,0)
 
-state = {'score': 0}
+state = {'score': 0} #allows the user to see what the current score is B.C
 path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible J.H
 writer = Turtle(visible=False) #Same as above but object is called writer J.H
-aim = vector(5, 0)      
-pacman = vector(-40, -80)    #Starting location of pacman R.K
-ghosts = [                   #Starting location of the ghosts R.K
+aim = vector(5, 0) # Pacman has a single 1 dimensional array when its aim equals vector(5,0) B.C
+pacman = vector(-40, -80)
+ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
     [vector(100, 160), vector(0, -5)],
@@ -85,7 +85,7 @@ def valid(point):
 def world():
     """Draw world using path."""
     bgcolor('black')
-    path.color('blue')
+    path.color('blue') #using ".color()" method, we can assign color to the path and background for the game B.C
 
     for index in range(len(tiles)):
         tile = tiles[index] #the map
@@ -95,20 +95,20 @@ def world():
             y = 180 - (index // 20) * 20
             square(x, y)
 
-            if tile == 1:        #Makes the food for pacman to eat R.K
+            if tile == 1: 
                 path.up()
-                path.goto(x + 10, y + 10)       #Moves pen to the center of tile R.K
-                path.dot(2, 'white')           #Creates a white dot of raidus 2 R.K
+                path.goto(x + 10, y + 10)
+                path.dot(2, 'white')
 
 
 def move():
     """Move pacman and all ghosts."""
     writer.undo()
-    writer.write(state['score'])
+    writer.write(state['score'])  # Using ".write(state['score'])" method, the programmer could write down 'score' as he wanted B.C
 
     clear()
 
-    if valid(pacman + aim):
+    if valid(pacman + aim): # If the code has a proper format, Pacman moves based on the assigned direction(aim) B.C
         pacman.move(aim)
 
     index = offset(pacman)
@@ -121,8 +121,8 @@ def move():
         square(x, y)
 
     up()
-    goto(pacman.x + 10, pacman.y + 10)  #Initial location of pacman R.K
-    dot(20, 'yellow')                   #Creates pacman R.K
+    goto(pacman.x + 10, pacman.y + 10)
+    dot(20, 'yellow')
 
     for point, course in ghosts:
         if valid(point + course):
@@ -151,18 +151,18 @@ def move():
     ontimer(move, 100)
 
 
-def change(x, y):
+def change(x, y): # if the change made is considered as 'valid', then Pacman is given a vector(x,y), depending on how the player playes the game B.C 
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
 
 
-setup(420, 420, 370, 0) 
+setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 writer.goto(160, 160)
-writer.color('white')
+writer.color('white') # The color is set to be 'white' for writer; one of the basic settings for the clear operation of the game B.C
 writer.write(state['score'])
 listen()
 
