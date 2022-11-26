@@ -113,7 +113,7 @@ def move():
 
     index = offset(pacman)
 
-    if tiles[index] == 1:
+    if tiles[index] == 1: # When Pacman collides with tiles with index of 1, the program shows a score went up by 1; 1 score increase B.C
         tiles[index] = 2
         state['score'] += 1
         x = (index % 20) * 20 - 200
@@ -163,7 +163,7 @@ hideturtle()
 tracer(False)
 writer.goto(160, 160)
 writer.color('white') # The color is set to be 'white' for writer; one of the basic settings for the clear operation of the game B.C
-writer.write(state['score'])
+writer.write(state['score']) # The writer operator shows the current score to users by using ".write(state['score'])" method B.C
 listen()
 
 onkey(lambda: change(5, 0), 'Right') #Speed of up,down,left,right of pacman J.H
