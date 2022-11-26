@@ -121,8 +121,8 @@ def move():
         square(x, y)
 
     up()
-    goto(pacman.x + 10, pacman.y + 10)
-    dot(20, 'yellow')
+    goto(pacman.x + 10, pacman.y + 10)         #Goes to the center of initial tile of pacman R.K
+    dot(20, 'yellow')                          #Creates a yellow dot of size 20 representing pacman R.K
 
     for point, course in ghosts:
         if valid(point + course):
@@ -139,8 +139,8 @@ def move():
             course.y = plan.y
 
         up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
+        goto(point.x + 10, point.y + 10)           #Goes to center of initial tile of ghost R.K
+        dot(20, 'red')                             #Creates a ghost R.K
 
     update()
 
