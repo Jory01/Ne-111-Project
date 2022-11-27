@@ -3,7 +3,7 @@ from turtle import *
 
 from freegames import floor, vector
 
-state = {'score': 0}
+state = {'score': 0} #It enables user to see the current score which starts from 0 B.C
 path = Turtle(visible=False) 
 writer = Turtle(visible=False) 
 aim = vector(0, 0)         #Set it from (5,0) -->(0,0) so pacman doesn't just start moving at the start without any inputs from the player J.H
@@ -74,7 +74,7 @@ def offset(point):
     return index
 
 
-def valid(point):
+def valid(point): #Return 'False' when the the tile index is 0 because it's not a valid point for Pacman B.C
     """Return True if point is valid in tiles."""
     index = offset(point)
 
@@ -89,7 +89,7 @@ def valid(point):
     return point.x % 20 == 0 or point.y % 20 == 0
 
 
-def world():
+def world(): #The background color was set for 'black', while the path color was fixed as 'blue' B.C
     """Draw world using path."""
     bgcolor('black')
     path.color('blue')
@@ -109,14 +109,14 @@ def world():
                 path.dot(4, 'white') #To increase visability dot size increased from (2)-->(4) J.H
 
 
-def move():
+def move(): # The 'writer' states change in score B.C
     """Move pacman and all ghosts."""
     writer.undo()
     writer.write(state['score'])
 
     clear()
 
-    if valid(pacman + aim):
+    if valid(pacman + aim): #Valid function checks if a proper format is given, and if so, the code moves Pacman in assigned direction B.C
         pacman.move(aim)
 
     index = offset(pacman)
@@ -161,7 +161,7 @@ def move():
     ontimer(move, 100)
 
 
-def change(x, y):
+def change(x, y): #If the code is considered 'valid', Pacman moves into a new point with changed aim based on the given vector(x,y) #B.C
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
         aim.x = x
@@ -173,8 +173,8 @@ hideturtle()
 tracer(False)
 writer.up() #Hides the turtle for when it goes to write the score, as before it was just a giant blackline across the screen J.H
 writer.goto(300, 300) #From map changes scoreboard would appear in the gamewindow so (160,160)-->(300,300) this moves it out of the window J.H
-writer.color('white')
-writer.write(state['score'])
+writer.color('white')# 'Writer' is assigned a color white for better game operation B.C
+writer.write(state['score']) #'Writer' writes a new score whenever Pacman touches a tile with index of 1 B.C
 listen()
 
 onkey(lambda: change(5, 0), 'Right') 
