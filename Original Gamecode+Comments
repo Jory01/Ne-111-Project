@@ -8,7 +8,7 @@ from freegames import floor, vector
 #center=Turtle(visible=True)
 #center.goto(0,0)
 
-state = {'score': 0} #allows the user to see what the current score is B.C
+state = {'score': 0} #Allows the user to see the score which starts from 0 B.C
 path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible J.H
 writer = Turtle(visible=False) #Same as above but object is called writer J.H
 aim = vector(5, 0) # Pacman has a single 1 dimensional array when its aim equals vector(5,0) B.C
@@ -71,7 +71,7 @@ def valid(point):
     """Return True if point is valid in tiles."""
     index = offset(point) #Finds the index of the vector using above function J.H/R.K
 
-    if tiles[index] == 0:
+    if tiles[index] == 0: #Return 'False' when the the tile index is 0 because it's not a valid point for Pacman B.C
         return False
 
     index = offset(point+19)
@@ -84,8 +84,8 @@ def valid(point):
 
 def world():
     """Draw world using path."""
-    bgcolor('black')
-    path.color('blue') #using ".color()" method, we can assign color to the path and background for the game B.C
+    bgcolor('black')#The background color was fixed as 'black' B.C
+    path.color('blue') #Using ".color()" method, the color of the path was assigned as 'blue' B.C
 
     for index in range(len(tiles)):
         tile = tiles[index] #the map
@@ -104,11 +104,11 @@ def world():
 def move():
     """Move pacman and all ghosts."""
     writer.undo()
-    writer.write(state['score'])  # Using ".write(state['score'])" method, the programmer could write down 'score' as he wanted B.C
+    writer.write(state['score'])  # Using ".write(state['score'])" method, the 'writter' writes down the score to show the change B.C
 
     clear()
 
-    if valid(pacman + aim): # If the code has a proper format, Pacman moves based on the assigned direction(aim) B.C
+    if valid(pacman + aim): #Valid function checks if a proper format is given, and if so, Pacman moves in the assigned direction(aim) B.C
         pacman.move(aim)
 
     index = offset(pacman)
@@ -151,7 +151,7 @@ def move():
     ontimer(move, 100)
 
 
-def change(x, y): # if the change made is considered as 'valid', then Pacman is given a vector(x,y), depending on how the player playes the game B.C 
+def change(x, y): # If the change made is considered as 'valid', Pacman moves into a new point with a changed aim based on the given vector(x,y)  B.C 
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
         aim.x = x
@@ -163,7 +163,7 @@ hideturtle()
 tracer(False)
 writer.goto(160, 160)
 writer.color('white') # The color is set to be 'white' for writer; one of the basic settings for the clear operation of the game B.C
-writer.write(state['score']) # The writer operator shows the current score to users by using ".write(state['score'])" method B.C
+writer.write(state['score']) # The writer operator shows the current score to users whenever Pacman collides with a tile of index of 1 B.C
 listen()
 
 onkey(lambda: change(5, 0), 'Right') #Speed of up,down,left,right of pacman J.H
