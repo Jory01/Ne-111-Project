@@ -11,10 +11,12 @@ pacman = vector(-140, -20) #Due to changing the height of the map from y (180-->
                            #pacman now spawns in a black tile so (-40,-80)-->(-140,-20) J.H
 
 ghosts = [
-    [vector(-280, 160), vector(5, 0)], #Due to shifting the map (-180,160)-->(-280,220)
-    [vector(-280, -160), vector(0, 5)], #Same for this (-180,-160)-->(-280,-100)
-    [vector(0, 220), vector(0, -5)],    # (100,160)-->(0,220)
-    [vector(0, -100), vector(-5, 0)],   # (100,-160)-->(0,-100)
+    [vector(-280, 160), vector(10, 0)], #Due to shifting the map (-180,160)-->(-280,220)
+    [vector(-280, -160), vector(0, 10)], #Same for this (-180,-160)-->(-280,-100)
+    [vector(0, 220), vector(0, -10)],    # (100,160)-->(0,220)
+    [vector(0, -100), vector(-10, 0)],   # (100,-160)-->(0,-100)
+    [vector(140, -100), vector(0, 10)],
+    [vector(280, 220), vector(0, -10)],
 ]
 # fmt: off
 tiles = [
@@ -44,7 +46,7 @@ tiles = [
     0, 1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1,
     0, 1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
     0, 1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1,
-    0, 1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1,
+    0, 1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1,
     0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -92,7 +94,7 @@ def valid(point):
 def world():
     """Draw world using path."""
     bgcolor('black')
-    path.color('blue')
+    path.color('orange')
 
     for index in range(len(tiles)):
         tile = tiles[index] 
@@ -106,7 +108,7 @@ def world():
             if tile == 1:
                 path.up()
                 path.goto(x + 10, y + 10)
-                path.dot(4, 'white') #To increase visability dot size increased from (2)-->(4) J.H
+                path.dot(4, 'brown') #To increase visability dot size increased from (2)-->(4) J.H
 
 
 def move():
@@ -132,7 +134,7 @@ def move():
 
     up()
     goto(pacman.x + 10, pacman.y + 10)
-    dot(20, 'yellow')
+    dot(20, 'purple')
 
     for point, course in ghosts:
         if valid(point + course):
@@ -150,7 +152,7 @@ def move():
 
         up()
         goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
+        dot(20, 'green')
 
     update()
 
@@ -160,12 +162,15 @@ def move():
 
     ontimer(move, 100)
 
-
 def change(x, y):
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
+        
+#def win(state):
+    #if state['score']=379:
+  
 
 
 setup(1000, 1000, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
@@ -177,10 +182,10 @@ writer.color('white')
 writer.write(state['score'])
 listen()
 
-onkey(lambda: change(5, 0), 'Right') 
-onkey(lambda: change(-5, 0), 'Left')
-onkey(lambda: change(0, 5), 'Up')
-onkey(lambda: change(0, -5), 'Down')
+onkey(lambda: change(10, 0), 'Right') 
+onkey(lambda: change(-10, 0), 'Left')
+onkey(lambda: change(0, 10), 'Up')
+onkey(lambda: change(0, -10), 'Down')
 world()
 move()
 done() 
