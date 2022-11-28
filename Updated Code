@@ -141,10 +141,10 @@ def move():
             point.move(course)
         else:
             options = [
-                vector(5, 0), 
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(8, 0), 
+                vector(-8, 0),
+                vector(0, 8),
+                vector(0, -8),
             ]
             plan = choice(options)
             course.x = plan.x
@@ -169,23 +169,23 @@ def change(x, y):
         aim.y = y
         
 #def win(state):
-    #if state['score']=379:
-  
+    #if state['score']==379:
+        #for tiles 
 
 
 setup(1000, 1000, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
 hideturtle()
 tracer(False)
 writer.up() #Hides the turtle for when it goes to write the score, as before it was just a giant blackline across the screen J.H
-writer.goto(300, 300) #From map changes scoreboard would appear in the gamewindow so (160,160)-->(300,300) this moves it out of the window J.H
+writer.goto(300, 300) #From map changes scoreboard would appear in the game window so (160,160)-->(300,300) this moves it out of the window J.H
 writer.color('white')
 writer.write(state['score'])
 listen()
 
-onkey(lambda: change(10, 0), 'Right') 
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+onkey(lambda: change(5, 0), 'Right') 
+onkey(lambda: change(-5, 0), 'Left')
+onkey(lambda: change(0, 5), 'Up')
+onkey(lambda: change(0, -5), 'Down')
 world()
 move()
 done() 
