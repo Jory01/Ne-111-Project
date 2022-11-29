@@ -168,9 +168,10 @@ def change(x, y):
         aim.x = x
         aim.y = y
         
-#def win(state):
+#def win(state['score']):
     #if state['score']==379:
         #for tiles 
+        #writer.write('You win', False, align='center', font=('Times New Roman', '90', 'bold')) #Victory statement R.K
 
 
 setup(1000, 1000, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
