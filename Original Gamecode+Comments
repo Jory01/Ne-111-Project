@@ -11,17 +11,17 @@ from freegames import floor, vector
 state = {'score': 0} #Allows the user to see the score which starts from 0 B.C
 path = Turtle(visible=False) #Generates a turtle object with name path and makes the indicator not visible J.H
 writer = Turtle(visible=False) #Same as above but object is called writer J.H
-aim = vector(5, 0) # Pacman has a single 1 dimensional array when its aim equals vector(5,0) B.C
+aim = vector(5, 0) # Pacman is a vector object and it moves using aim which equals vector(5,0) B.C
 pacman = vector(-40, -80)
 ghosts = [
-    [vector(-180, 160), vector(5, 0)],
+    [vector(-180, 160), vector(5, 0)],          #The first vector in each tuple in the list of tuples is the spawn location of the ghosts J.H
     [vector(-180, -160), vector(0, 5)],
     [vector(100, 160), vector(0, -5)],
     [vector(100, -160), vector(-5, 0)],
 ]
 # fmt: off
 tiles = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #first 0 is x=-200 y=180, last 0 in the row is 180,180 J.H/R.K
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #tiles[0] is located at (x=-200,y=180) last 0 in the uppermost row is (x,y)=(180,180) J.H/R.K
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -79,9 +79,10 @@ def valid(point):
     if tiles[index] == 0:
         return False
 
-    return point.x % 20 == 0 or point.y % 20 == 0
-
-
+    return point.x % 20 == 0 or point.y % 20 == 0 #Because everything moves by adding/subtracting 5 in either (x,y) (it either changes x or y NOT both)
+                                                  #So if this was an AND statement everytime the x or y value would change by 5 it would read False
+                                                  #As if pacman was at (80,60) for example and moved +5 he would be at (85,60) and even if this was a valid postion
+                                                  #85%20 is NOT zero so it would incorrectly return False if it was an AND statement instead of an or statement J.H
 def world():
     """Draw world using path."""
     bgcolor('black')#The background color was fixed as 'black' B.C
@@ -97,8 +98,8 @@ def world():
 
             if tile == 1: 
                 path.up()
-                path.goto(x + 10, y + 10)
-                path.dot(2, 'white')
+                path.goto(x + 10, y + 10) #Moves the turtle object "path" to the middle of every blue square J.H
+                path.dot(2, 'white') #Draws the white dots on the map that pacman is going to collect in the middle of each blue square J.H
 
 
 def move():
@@ -108,17 +109,18 @@ def move():
 
     clear()
 
-    if valid(pacman + aim): #Valid function checks if a proper format is given, and if so, Pacman moves in the assigned direction(aim) B.C
+    if valid(pacman + aim): #Valid function checks if a proper postion vector is given, and if so, Pacman moves in the assigned direction(aim) B.C
         pacman.move(aim)
 
-    index = offset(pacman)
+    index = offset(pacman) #Sets the index to be pacman's current index in tiles J.H
 
-    if tiles[index] == 1: # When Pacman collides with tiles with index of 1, the program shows a score went up by 1; 1 score increase B.C
-        tiles[index] = 2
-        state['score'] += 1
+    if tiles[index] == 1: #The program check if the value at the index pacman is at is eqaul to 1 B.C
+        tiles[index] = 2 #If the index pacman was at had a value equal to one change its value to 2 J.H 
+        state['score'] += 1 #When the value at tiles[index] is changed to 2 increase the score by 1
         x = (index % 20) * 20 - 200
         y = 180 - (index // 20) * 20
-        square(x, y)
+        square(x, y) #When the index value is changed from 1-->2 it draws a new blue square on the (x,y) postion of where that square was which makes the white dots
+                     #"disappear" when pacman "collects" them J.H
 
     up()
     goto(pacman.x + 10, pacman.y + 10)         #Goes to the center of initial tile of pacman R.K
@@ -144,7 +146,7 @@ def move():
 
     update()
 
-    for point, course in ghosts:
+    for point, course in ghosts:                   #This checks if pacman has collided with a ghost if he does the game...kinda just crashes J.H
         if abs(pacman - point) < 20:
             return
 
