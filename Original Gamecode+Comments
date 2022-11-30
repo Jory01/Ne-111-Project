@@ -146,16 +146,17 @@ def move():
 
     update()
 
-    for point, course in ghosts:                   #This checks if pacman has collided with a ghost if he does the game...kinda just crashes J.H
-        if abs(pacman - point) < 20:
-            return
+    for point, course in ghosts:         #This checks if pacman and a ghost are closer than a distance of 20 (in either x or y)
+        if abs(pacman - point) < 20:     #If the statement is True that means pacman and a ghost are on the same index/tile
+            return                       #If this is the case the move function returns meaning it is no longer called so all movement stops (the game 'freezes') J.H
+           
 
     ontimer(move, 100)
 
 
 def change(x, y): # If the change made is considered as 'valid', Pacman moves into a new point with a changed aim based on the given vector(x,y)  B.C 
     """Change pacman aim if valid."""
-    if valid(pacman + vector(x, y)):
+    if valid(pacman + vector(x, y)):  #When a key is pressed this function is called if the postion is valid pacman's movement is switched based on the key pressed J.H
         aim.x = x
         aim.y = y
 
@@ -164,7 +165,7 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 writer.goto(160, 160)
-writer.color('white') # The color is set to be 'white' for writer; one of the basic settings for the clear operation of the game B.C
+writer.color('white') # The color is set to be 'white' for writer; one of the basic settings for the color method B.C
 writer.write(state['score']) # The writer operator shows the current score to users whenever Pacman collides with a tile of index of 1 B.C
 listen()
 
