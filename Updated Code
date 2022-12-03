@@ -201,13 +201,13 @@ def move():
         if abs(pacman - point) < 20:
             clear()                                #Removes ghosts and pacman from the screen   R.K
             message.color('white')                 #Changes the font color of the message to from black to white J.H
-            message.write('Game over', False, align='center', font=('Times New Roman', '90', 'bold'))   #Write the defeat message R.K
+            message.write('Game Over', False, align='center', font=('Times New Roman', '90', 'bold'))   #Write the defeat message R.K
             return
             
     if state['score']==379:
         clear()                  #Removes ghosts and pacman from the screen  R.K
         message.color('white')   #Changes the font color of the message from black to white J.H
-        message.write('You win', False, align='center', font=('Times New Roman', '90', 'bold'))   #Writes the victory statement  R.K
+        message.write('You Win', False, align='center', font=('Times New Roman', '90', 'bold'))   #Writes the victory statement  R.K
         return
         
     ontimer(move, 100)
