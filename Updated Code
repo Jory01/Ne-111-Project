@@ -41,7 +41,7 @@ maps =[[
     0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1,
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1,
+    0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1,
@@ -205,6 +205,8 @@ def move():
             return
             
     if state['score']==379:
+        writer.clear() #Remove the current writer J.H
+        writer.write(state['score']) #Makes the writer return and display the correct score upon winning the game J.H
         clear()                  #Removes ghosts and pacman from the screen  R.K
         message.color('white')   #Changes the font color of the message from black to white J.H
         message.write('You Win', False, align='center', font=('Times New Roman', '90', 'bold'))   #Writes the victory statement  R.K
