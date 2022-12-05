@@ -151,7 +151,7 @@ def move():
             return                       #If this is the case the move function returns meaning it is no longer called so all movement stops (the game 'freezes') J.H
            
 
-    ontimer(move, 100)
+    ontimer(move, 100)                  #Calls the move function every 100ms J.H
 
 
 def change(x, y): # If the change made is considered as 'valid', Pacman moves into a new point with a changed aim based on the given vector(x,y)  B.C 
@@ -161,7 +161,7 @@ def change(x, y): # If the change made is considered as 'valid', Pacman moves in
         aim.y = y
 
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0) #Size of game window on launch J.H
 hideturtle()
 tracer(False)
 writer.goto(160, 160)
