@@ -221,7 +221,7 @@ def change(x, y):
         aim.y = y
 
 
-setup(1000, 1000, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
+setup(700, 700, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
 hideturtle()
 tracer(False)
 writer.up() #Hides the turtle for when it goes to write the score, as before it was just a giant blackline across the screen J.H
