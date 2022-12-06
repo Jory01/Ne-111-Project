@@ -1,4 +1,5 @@
-J.H=Jory Haberman R.K=Ryan Khandaker B.C=Brian Choi
+# Brain Choi (Student #21009125), Jory Haberman (Student #20930846), Ryan Khandaker (Student #21011642)
+# J.H=Jory Haberman R.K=Ryan Khandaker B.C=Brian Choi
 
 from random import choice
 from turtle import *
