@@ -1,4 +1,4 @@
-# Brain Choi (Student #21009125), Jory Haberman (Student #20930846), Ryan Khandaker (Student #21011642)
+# Brian Choi (Student #21009125), Jory Haberman (Student #20930846), Ryan Khandaker (Student #21011642)
 
 from random import choice
 from turtle import *
@@ -10,16 +10,16 @@ path = Turtle(visible=False)
 writer = Turtle(visible=False) 
 message = Turtle(visible=False)   #Generate a Turtle object that write a victory/defeat message    R.K
 aim = vector(0, 0)         #Set it from (5,0) -->(0,0) so pacman doesn't just start moving at the start without any inputs from the player J.H
-pacman = vector(-140, -20) #Due to changing the height of the map from y (180-->240) (or 3 squares up) and the length of the map from x(-200)-->(-300) (10 squares to the left)
-                           #pacman now spawns in a black tile so (-40,-80)-->(-140,-20) J.H
+pacman = vector(-160, 20) #Due to changing the height of the map from y (180-->280) (or 5 squares up) and the length of the map from x(-200)-->(-320) (11 squares to the left)
+                           #pacman now spawns in a black tile so (-40,-80)-->(-160,20) J.H
 
 ghosts = [
-    [vector(-280, 160), vector(10, 0)], #Due to shifting the map (-180,160)-->(-280,220)
-    [vector(-280, -160), vector(0, 10)], #Same for this (-180,-160)-->(-280,-100)
-    [vector(0, 220), vector(0, -10)],    # (100,160)-->(0,220)
-    [vector(0, -100), vector(-10, 0)],   # (100,-160)-->(0,-100) J.H
-    [vector(140, -100), vector(0, 10)],  #Added two more ghosts to make it a bit harder R.K
-    [vector(280, 220), vector(0, -10)],
+    [vector(-300, 200), vector(10, 0)], #Due to shifting the map (-180,160)-->(-300,200)
+    [vector(-300, -120), vector(0, 10)], #Same for this (-180,-160)-->(-300,-120)
+    [vector(-20, 260), vector(0, -10)],    # (100,160)-->(-20,260)
+    [vector(-20, -60), vector(-10, 0)],   # (100,-160)-->(120,-40) J.H
+    [vector(120, -60), vector(0, 10)],  #Added two more ghosts to make it a bit harder R.K
+    [vector(260, 260), vector(0, -10)],
 ]
 # fmt: off
 
@@ -113,8 +113,8 @@ def square(x, y):
 
 def offset(point): 
     """Return offset of point in tiles."""
-    x = (floor(point.x, 20) + 300) / 20  #to make the map more centered we move x (200)-->(300) (moving the map 10 squares to the left) J.H
-    y = (240 - floor(point.y, 20)) / 20  # Making the map three squares larger for visability so  y = ((180 - floor(point.y, 20)) / 20) --> (y = (240 - floor(point.y, 20)) / 20) J.H
+    x = (floor(point.x, 20) + 320) / 20  #to make the map more centered we move x (200)-->(320) (moving the map 11 squares to the left) J.H
+    y = (280 - floor(point.y, 20)) / 20  # Moving the map five squares up for visability so  y = ((180 - floor(point.y, 20)) / 20) --> (y = (280 - floor(point.y, 20)) / 20) J.H
     index = int(x + y * 30)               #Now that its 30x30 the first change in y is every 30 indexs so at index=0 its (x,y)=(-200,180) and at index=30 its (x,y)=(-200,160) J.H
     return index
 
@@ -143,9 +143,9 @@ def world():
         tile = tiles[index] 
 
         if tile > 0:
-            x = (index % 30) * 20 - 300  #To ajust that its now 30x30 changed (index %20)-->(index%30) 
-                                         #AND to make the map more centered we move x (-200)-->(-300) (moving the map 10 squares to the left) J.H
-            y = 240 - (index // 30) * 20 # Changed (index//20)-->(index//30) AND y changed from (180-->240) as to increase map by three squares upwords J.H
+            x = (index % 30) * 20 - 320  #To ajust that its now 30x30 changed (index %20)-->(index%30) 
+                                         #AND to make the map more centered we move x (-200)-->(-320) (moving the map 10 squares to the left) J.H
+            y = 280 - (index // 30) * 20 # Changed (index//20)-->(index//30) AND y changed from (180-->280) as to increase map by five squares upwords J.H
             square(x, y)
 
             if tile == 1:
@@ -169,10 +169,10 @@ def move():
     if tiles[index] == 1:
         tiles[index] = 2
         state['score'] += 1
-        x = (index % 30) * 20 - 300  #Now that it is (30x30) the x values change from 0-->30 NOT 0-->20 so (index%20)-->(index%30)
-                                     #Also to make the map more centered we move x (-200)-->(-300) (moving the map 10 squares to the left J.H                                                                              
-        y = 240 - (index // 30) * 20 #Its a (30x30) so the y values changes EVERY 30 indexs so (index//20)--->(index//30) J.H
-                                     # y changed from (180-->240) to adjust for mapsize increase J.H
+        x = (index % 30) * 20 - 320  #Now that it is (30x30) the x values change from 0-->30 NOT 0-->20 so (index%20)-->(index%30)
+                                     #Also to make the map more centered we move x (-200)-->(-320) (moving the map 11 squares to the left J.H                                                                              
+        y = 280 - (index // 30) * 20 #Its a (30x30) so the y values changes EVERY 30 indexs so (index//20)--->(index//30) J.H
+                                     # y changed from (180-->280) to adjust for mapsize increase J.H
         square(x, y)
 
     up()
@@ -223,11 +223,11 @@ def change(x, y):
         aim.y = y
 
 
-setup(700, 700, 370, 0)      #The window opens up to a 1000x1000 pixel screen instead of a 420x420 pixel screen   R.K
+setup(650, 650, 400, 0)      #The window opens up to a 650x650 (the 400 is where on the screen) pixel screen instead of a 420x420 pixel screen   R.K
 hideturtle()
 tracer(False)
 writer.up() #Hides the turtle for when it goes to write the score, as before it was just a giant blackline across the screen J.H
-writer.goto(300, 300) #From map changes scoreboard would appear in the game window so (160,160)-->(300,300) this moves it out of the window J.H
+writer.goto(280, 300) #From map changes scoreboard would appear in the game window so (160,160)-->(280,300) this moves it out of the window J.H
 writer.color('white')
 writer.write(state['score'])
 listen()
